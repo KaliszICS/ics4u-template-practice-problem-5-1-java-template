@@ -150,7 +150,7 @@ class PracticeProblemTest {
 /**
  * Tests for the Person class
  */
-class PersonTest extends ReflectionSafetyTest {
+class PersonTest extends PracticeProblemTest {
     
     @Test
     public void testPersonClassExists() {
