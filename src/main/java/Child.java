@@ -18,14 +18,6 @@ public class Child extends Person {
     return this.parent2;
   }
 
-  public void setParent1(Parent parent) {
-    this.parent1 = parent;
-  }
-
-  public void setParent2(Parent parent) {
-    this.parent2 = parent;
-  }
-
   public Child[] getSiblings() {
     return this.siblings;
   }
