@@ -1,5 +1,5 @@
-class Lesson {
-	public static void run() {
+class Notes {
+	public static void main(String args[]) {
 		Rectangle rect = new Rectangle(15, 20);
 
 		System.out.println(rect.getWidth());
