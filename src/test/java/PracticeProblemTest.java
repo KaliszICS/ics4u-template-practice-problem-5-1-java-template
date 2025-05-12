@@ -54,6 +54,22 @@ class PracticeProblemTest {
             return null;
         }
     }
+
+    /**
+     * Safely checks if a method exists in the class or any of its superclasses
+     * @param clazz The class to check
+     * @param methodName The method name
+     * @param parameterTypes The parameter types for the method
+     * @return The Method object or null if it doesn't exist
+     */
+    protected Method safeGetMethodIncludingInherited(Class<?> clazz, String methodName, Class<?>... parameterTypes) {
+        if (clazz == null) return null;
+        try {
+            return clazz.getMethod(methodName, parameterTypes);
+        } catch (NoSuchMethodException e) {
+            return null;
+        }
+    }
     
     /**
      * Safely checks if a field exists
@@ -145,12 +161,7 @@ class PracticeProblemTest {
         if (clazz == null || superClass == null) return false;
         return superClass.isAssignableFrom(clazz);
     }
-}
 
-/**
- * Tests for the Person class
- */
-class PersonTest extends PracticeProblemTest {
     
     @Test
     public void testPersonClassExists() {
@@ -232,12 +243,7 @@ class PersonTest extends PracticeProblemTest {
         assertEquals(25, safeInvokeMethod(getAgeMethod, person), 
                    "getAge should return the updated age");
     }
-}
 
-/**
- * Tests for the Parent class
- */
-class ParentTest extends PracticeProblemTest {
     
     @Test
     public void testParentClassExists() {
@@ -295,18 +301,22 @@ class ParentTest extends PracticeProblemTest {
         Class<?> parentClass = safeGetClass("Parent");
         Class<?> childClass = safeGetClass("Child");
         
-        // Test inherited getters and setters
-        Method getNameMethod = safeGetMethod(parentClass, "getName");
-        assertNotNull(getNameMethod, "Parent should inherit getName method");
+        // Test inherited getters and setters - use getMethod instead of getDeclaredMethod
+        Method getNameMethod = parentClass == null ? null : 
+            safeGetMethodIncludingInherited(parentClass, "getName");
+        assertNotNull(getNameMethod, "Parent should have getName method (inherited or overridden)");
         
-        Method setNameMethod = safeGetMethod(parentClass, "setName", String.class);
-        assertNotNull(setNameMethod, "Parent should inherit setName method");
+        Method setNameMethod = parentClass == null ? null :
+            safeGetMethodIncludingInherited(parentClass, "setName", String.class);
+        assertNotNull(setNameMethod, "Parent should have setName method (inherited or overridden)");
         
-        Method getAgeMethod = safeGetMethod(parentClass, "getAge");
-        assertNotNull(getAgeMethod, "Parent should inherit getAge method");
+        Method getAgeMethod = parentClass == null ? null :
+            safeGetMethodIncludingInherited(parentClass, "getAge");
+        assertNotNull(getAgeMethod, "Parent should have getAge method (inherited or overridden)");
         
-        Method setAgeMethod = safeGetMethod(parentClass, "setAge", int.class);
-        assertNotNull(setAgeMethod, "Parent should inherit setAge method");
+        Method setAgeMethod = parentClass == null ? null :
+            safeGetMethodIncludingInherited(parentClass, "setAge", int.class);
+        assertNotNull(setAgeMethod, "Parent should have setAge method (inherited or overridden)");
         
         // Test Parent-specific getters and setters
         Method getSpouseMethod = safeGetMethod(parentClass, "getSpouse");
@@ -395,12 +405,7 @@ class ParentTest extends PracticeProblemTest {
             assertEquals(child, motherChildren[0], "Child should be in mother's children array");
         }
     }
-}
 
-/**
- * Tests for the Child class
- */
-class ChildTest extends PracticeProblemTest {
     
     @Test
     public void testChildClassExists() {
@@ -454,23 +459,27 @@ class ChildTest extends PracticeProblemTest {
         }
     }
     
-    @Test
+     @Test
     public void testChildGettersAndSetters() {
         Class<?> childClass = safeGetClass("Child");
         Class<?> parentClass = safeGetClass("Parent");
         
-        // Test inherited getters and setters
-        Method getNameMethod = safeGetMethod(childClass, "getName");
-        assertNotNull(getNameMethod, "Child should inherit getName method");
+        // Test inherited getters and setters - use getMethod instead of getDeclaredMethod
+        Method getNameMethod = childClass == null ? null :
+            safeGetMethodIncludingInherited(childClass, "getName");
+        assertNotNull(getNameMethod, "Child should have getName method (inherited or overridden)");
         
-        Method setNameMethod = safeGetMethod(childClass, "setName", String.class);
-        assertNotNull(setNameMethod, "Child should inherit setName method");
+        Method setNameMethod = childClass == null ? null :
+            safeGetMethodIncludingInherited(childClass, "setName", String.class);
+        assertNotNull(setNameMethod, "Child should have setName method (inherited or overridden)");
         
-        Method getAgeMethod = safeGetMethod(childClass, "getAge");
-        assertNotNull(getAgeMethod, "Child should inherit getAge method");
+        Method getAgeMethod = childClass == null ? null :
+            safeGetMethodIncludingInherited(childClass, "getAge");
+        assertNotNull(getAgeMethod, "Child should have getAge method (inherited or overridden)");
         
-        Method setAgeMethod = safeGetMethod(childClass, "setAge", int.class);
-        assertNotNull(setAgeMethod, "Child should inherit setAge method");
+        Method setAgeMethod = childClass == null ? null :
+            safeGetMethodIncludingInherited(childClass, "setAge", int.class);
+        assertNotNull(setAgeMethod, "Child should have setAge method (inherited or overridden)");
         
         // Test Child-specific getters (no setters for parents)
         Method getParent1Method = safeGetMethod(childClass, "getParent1");
