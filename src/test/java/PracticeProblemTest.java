@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Base test class that provides reflection safety methods
  */
-public class ReflectionSafetyTest {
+class PracticeProblemTest {
     
     /**
      * Safely checks if a class exists
@@ -150,7 +150,7 @@ public class ReflectionSafetyTest {
 /**
  * Tests for the Person class
  */
-public class PersonTest extends ReflectionSafetyTest {
+class PersonTest extends ReflectionSafetyTest {
     
     @Test
     public void testPersonClassExists() {
