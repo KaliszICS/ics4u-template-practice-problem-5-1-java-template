@@ -24,14 +24,6 @@ class PracticeProblemTest {
             return null;
         }
     }
-
-    protected Class<?> safeGetClass2(String className) {
-        try {
-            return Class.forName(className);
-        } catch (ClassNotFoundException e) {
-            return null;
-        }
-    }
     
     /**
      * Safely checks if a constructor exists
@@ -44,7 +36,7 @@ class PracticeProblemTest {
         try {
             return clazz.getDeclaredConstructor(parameterTypes);
         } catch (NoSuchMethodException e) {
-            fail("Constructor does not exist")
+            fail("Constructor does not exist");
             return null;
         }
     }
@@ -62,6 +54,22 @@ class PracticeProblemTest {
             return clazz.getDeclaredMethod(methodName, parameterTypes);
         } catch (NoSuchMethodException e) {
             fail("Class" + methodName + " does not exist");
+            return null;
+        }
+    }
+
+    /**
+     * Safely checks if a method exists
+     * @param clazz The class to check
+     * @param methodName The method name
+     * @param parameterTypes The parameter types for the method
+     * @return The Method object or null if it doesn't exist
+     */
+    protected Method safeGetMethod2(Class<?> clazz, String methodName, Class<?>... parameterTypes) {
+        if (clazz == null) return null;
+        try {
+            return clazz.getDeclaredMethod(methodName, parameterTypes);
+        } catch (NoSuchMethodException e) {
             return null;
         }
     }
