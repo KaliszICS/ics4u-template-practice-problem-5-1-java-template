@@ -237,7 +237,7 @@ class PersonTest extends PracticeProblemTest {
 /**
  * Tests for the Parent class
  */
-public class ParentTest extends ReflectionSafetyTest {
+class ParentTest extends PracticeProblemTest {
     
     @Test
     public void testParentClassExists() {
@@ -400,7 +400,7 @@ public class ParentTest extends ReflectionSafetyTest {
 /**
  * Tests for the Child class
  */
-public class ChildTest extends ReflectionSafetyTest {
+class ChildTest extends PracticeProblemTest {
     
     @Test
     public void testChildClassExists() {
