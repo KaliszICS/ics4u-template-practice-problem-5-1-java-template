@@ -24,6 +24,14 @@ class PracticeProblemTest {
             return null;
         }
     }
+
+    protected Class<?> safeGetClass2(String className) {
+        try {
+            return Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
+    }
     
     /**
      * Safely checks if a constructor exists
@@ -499,10 +507,10 @@ class PracticeProblemTest {
         }
         
         // Test for absence of parent setters
-        Method setParent1Method = safeGetMethod(childClass, "setParent1", parentClass);
+        Method setParent1Method = safeGetMethod2(childClass, "setParent1", parentClass);
         assertNull(setParent1Method, "Child should NOT have a setParent1 method");
         
-        Method setParent2Method = safeGetMethod(childClass, "setParent2", parentClass);
+        Method setParent2Method = safeGetMethod2(childClass, "setParent2", parentClass);
         assertNull(setParent2Method, "Child should NOT have a setParent2 method");
         
         // Test siblings getter and setter
