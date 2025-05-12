@@ -13,7 +13,7 @@ public class Person {
   }
 
   public int getAge() {
-    reutnr this.age;
+    return this.age;
   }
 
   public void setName(String name) {
