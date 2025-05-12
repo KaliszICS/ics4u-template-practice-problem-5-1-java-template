@@ -1,7 +1,7 @@
 public class Parent extends Person {
 
   Parent spouse = null;
-  Child children = new Child[0];
+  Child[] children = new Child[0];
   
   public Parent(String name, int age, Parent spouse) {
     super(name, age);
