@@ -20,6 +20,7 @@ class PracticeProblemTest {
         try {
             return Class.forName(className);
         } catch (ClassNotFoundException e) {
+            fail("Class" + className + " does not exist");
             return null;
         }
     }
@@ -35,6 +36,7 @@ class PracticeProblemTest {
         try {
             return clazz.getDeclaredConstructor(parameterTypes);
         } catch (NoSuchMethodException e) {
+            fail("Constructor does not exist")
             return null;
         }
     }
@@ -51,6 +53,7 @@ class PracticeProblemTest {
         try {
             return clazz.getDeclaredMethod(methodName, parameterTypes);
         } catch (NoSuchMethodException e) {
+            fail("Class" + methodName + " does not exist");
             return null;
         }
     }
@@ -67,6 +70,7 @@ class PracticeProblemTest {
         try {
             return clazz.getMethod(methodName, parameterTypes);
         } catch (NoSuchMethodException e) {
+            fail("Class" + methodName + " was not inherited");
             return null;
         }
     }
